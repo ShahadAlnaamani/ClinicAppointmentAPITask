@@ -1,4 +1,6 @@
 
+using ClinicAppointmentTask.Repositories;
+using ClinicAppointmentTask.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace ClinicAppointmentTask
@@ -12,6 +14,12 @@ namespace ClinicAppointmentTask
             // Add services to the container.
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            builder.Services.AddScoped<IClinicRepository, ClinicRepository>();
+
+
+            builder.Services.AddScoped<IClinicService, ClinicService>();
+
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
