@@ -75,12 +75,17 @@ namespace ClinicAppointmentTask.Services
         public int NewClinicValidation(int slots, string specialization)
         {
             bool SlotNos = ClinicSlotNumberOk(slots);
-            bool Specialization = ClinicSpecializationOk(specialization);
+            int Specialization = ClinicSpecializationOk(specialization);
 
             if (SlotNos)
             {
-                if (Specialization)
-                    return 0; //Specialization length and slot number acceptable 
+                //Specialization length and slot number acceptable 
+                if (Specialization == 0)
+                    return 0; 
+
+                //Specialization length is too short 
+                else if (Specialization == 2)
+                    return 3;
 
                 else return 2; //specialization length too long
             }
@@ -96,10 +101,20 @@ namespace ClinicAppointmentTask.Services
             else return true;
         }
 
-        public bool ClinicSpecializationOk(string specialization)
+        public int ClinicSpecializationOk(string specialization)
         {
-            if (specialization.Length > 20) return false; //checks length of specialization less than 20
-            else return true;
+            //checks length of specialization more than 20
+            if (specialization.Length > 20)
+            {
+                return 1; 
+            }
+
+            //checks that specialization length is more than 1 
+            else if (specialization.Length < 2 || specialization == null)
+                return 2;
+
+            //All good
+            else return 0;
         }
 
     }

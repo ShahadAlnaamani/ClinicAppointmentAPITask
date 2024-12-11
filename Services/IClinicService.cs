@@ -9,7 +9,7 @@ namespace ClinicAppointmentTask.Services
         public int GetClinicID(string ClinicName);
         public int GetNextClinicSlot(string ClinicSpecialization);
         public bool ClinicSlotNumberOk(int slots);
-        public bool ClinicSpecializationOk(string specialization);
+        public int ClinicSpecializationOk(string specialization);
         public int NewClinicValidation(int slots, string specialization);
 
     }

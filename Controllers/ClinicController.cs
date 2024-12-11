@@ -41,6 +41,9 @@ namespace ClinicAppointmentTask.Controllers
                     case 2:
                         return BadRequest("<!>Specialization too long<!>");
 
+                    case 3:
+                        return BadRequest("<!>Specialization must be 2 or more characters<!>");
+
                     default: return BadRequest("<!>Error occured in creating clinic try again<!>");
                 }
 
