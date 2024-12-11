@@ -10,6 +10,7 @@ namespace ClinicAppointmentTask.Models
         public int CID { get; set; }
 
         [Identity]
+        [MaxLength(50)]
         public string Specialization { get; set; }
 
         [DefaultValue(0)]

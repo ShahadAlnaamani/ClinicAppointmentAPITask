@@ -71,12 +71,36 @@ namespace ClinicAppointmentTask.Services
             return _clinicRepository.GetNextSlot(ClinicSpecialization);
         }
 
+        //Validation of user input for adding new clinic
+        public int NewClinicValidation(int slots, string specialization)
+        {
+            bool SlotNos = ClinicSlotNumberOk(slots);
+            bool Specialization = ClinicSpecializationOk(specialization);
+
+            if (SlotNos)
+            {
+                if (Specialization)
+                    return 0; //Specialization length and slot number acceptable 
+
+                else return 2; //specialization length too long
+            }
+
+            else return 1; //slots no over 20 
+        }
+
 
         //Checks that the number of slots does not exceed the maximum (20)
         public bool ClinicSlotNumberOk(int slots)
         {
-            if (slots > 20) return false;
+            if (slots > 20) return false; //checks slot number less than 20
             else return true;
         }
+
+        public bool ClinicSpecializationOk(string specialization)
+        {
+            if (specialization.Length > 20) return false; //checks length of specialization less than 20
+            else return true;
+        }
+
     }
 }
