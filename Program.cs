@@ -17,10 +17,12 @@ namespace ClinicAppointmentTask
 
             builder.Services.AddScoped<IClinicRepository, ClinicRepository>();
             builder.Services.AddScoped<IPatientRepository, PatientRepository>();
+            builder.Services.AddScoped<IBookingRepository, BookingRepository>();
 
 
             builder.Services.AddScoped<IClinicService, ClinicService>();
             builder.Services.AddScoped<IPatientService, PatientService>();
+            builder.Services.AddScoped<IBookingService, BookingService>();
 
 
             builder.Services.AddControllers();
