@@ -90,7 +90,7 @@ namespace ClinicAppointmentTask.Services
 
                 //Specialization contains charachters other than letters  
                 else if (Specialization == 3)
-                    return ;
+                    return 4;
 
                 else return 2; //specialization length too long
             }

@@ -1,6 +1,8 @@
 ﻿using ClinicAppointmentTask.Models;
 using ClinicAppointmentTask.Repositories;
 using System.Globalization;
+using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace ClinicAppointmentTask.Services
 {
@@ -69,6 +71,28 @@ namespace ClinicAppointmentTask.Services
         public bool PatientExists(string patientName)
         {
             return _patientRepository.PatientExists(patientName);
+        }
+
+
+        //Validates patient information 
+        public int PatientValidation(string name, int age, Gender gender)
+        {
+            //Validates that age is between 1-100
+            if (age == 0 || age == null || age >100)
+                return 1; 
+
+            //Validates that gender is
+            //not null 
+            if (gender == null)
+                return 2;
+
+            //Validates that name is not null and does not contain numbers or special characters 
+            //Also checks that full name is given 
+            if (name == null || (!Regex.IsMatch(name, @"^[a-zA-Z]")))
+                return 3;
+
+            //Everything is good to go ahead
+            return 0;
         }
     }
 }

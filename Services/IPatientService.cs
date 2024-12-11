@@ -8,5 +8,6 @@ namespace ClinicAppointmentTask.Services
         List<Patient> GetAllPatients();
         public int GetPatientID(string patientName);
         public bool PatientExists(string patientName);
+        public int PatientValidation(string name, int age, Gender gender);
     }
 }

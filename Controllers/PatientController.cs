@@ -1,6 +1,7 @@
 ﻿using ClinicAppointmentTask.Models;
 using ClinicAppointmentTask.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace ClinicAppointmentTask.Controllers
 {
@@ -20,13 +21,30 @@ namespace ClinicAppointmentTask.Controllers
         {
             try
             {
-                int newPatientId = _patientService.AddPatient(new Patient
+                int Validation = _patientService.PatientValidation(name, age, gender);
+
+                switch (Validation)
                 {
-                    Name = name,
-                    Age = age,
-                    Gender = gender
-                });
-                return Created(string.Empty, newPatientId);
+                    case 0:
+                        int newPatientId = _patientService.AddPatient(new Patient
+                        {
+                            Name = name,
+                            Age = age,
+                            Gender = gender
+                        });
+                        return Created(string.Empty, newPatientId);
+
+                    case 1:
+                        return BadRequest("<!>Age must be between 1-100<!>");
+
+                    case 2:
+                        return BadRequest("<!>Gender must be added<!>");
+
+                    case 3:
+                        return BadRequest("<!>Include first and last name with no special characters or numbers<!>");
+
+                    default: return BadRequest("<!>Error occured in adding patient try again<!>");
+                }
             }
             catch (Exception ex)
             {
