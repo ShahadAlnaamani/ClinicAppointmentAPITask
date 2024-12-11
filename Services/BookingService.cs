@@ -6,24 +6,24 @@ namespace ClinicAppointmentTask.Services
     public class BookingService : IBookingService
     {
         private readonly IBookingRepository _bookingRepository;
-        private readonly IPatientRepository _patientRepository;
-        private readonly IClinicRepository _clinicRepository;
+        private readonly IPatientService _patientService;
+        private readonly IClinicService _clinicService;
 
-        public BookingService(IBookingRepository bookingRepository, IPatientRepository patientRepository, IClinicRepository clinicRepository)
+        public BookingService(IBookingRepository bookingRepository, IPatientService patientService, IClinicService clinicService)
         {
             _bookingRepository = bookingRepository;
-            _patientRepository = patientRepository;
-            _clinicRepository = clinicRepository;
+            _patientService = patientService;
+            _clinicService = clinicService;
         }
 
 
         //Adds new booking [returns clinic ID]
         public int AddBooking(DateTime date, string patientName, string clinicSpecialization)
         {
-            int PatientID = _patientRepository.GetPatientID(patientName);
+            int PatientID = _patientService.GetPatientID(patientName);
 
             //Calculating slot number 
-            int clinicID = _clinicRepository.GetClinicID(clinicSpecialization);
+            int clinicID = _clinicService.GetClinicID(clinicSpecialization);
             int TakenSlots = _bookingRepository.GetTakenSlots(date, clinicID);
 
             int SlotNumber = TakenSlots + 1;
@@ -44,7 +44,7 @@ namespace ClinicAppointmentTask.Services
         //Validates if patient exists using PatientName [returns bool]
         public bool PatientExists(string patientName)
         {
-            bool patientExists = _patientRepository.PatientExists(patientName);
+            bool patientExists = _patientService.PatientExists(patientName);
             if (patientExists)
             {
                 return true; //patient found
@@ -62,14 +62,14 @@ namespace ClinicAppointmentTask.Services
                 bool patientExists = PatientExists(patientName);
                 if (patientExists) //found patient
                 {
-                    int PatientID = _patientRepository.GetPatientID(patientName);
-                    int TotalSlots = _clinicRepository.GetNextSlot(clinicSpecialization);
+                    int PatientID = _patientService.GetPatientID(patientName);
+                    int TotalSlots = _clinicService.GetNextClinicSlot(clinicSpecialization);
 
                     //Checking slot availability
                     if (TotalSlots != 0) //found clinic
                     {
                         //Calculating slot number 
-                        int clinicID = _clinicRepository.GetClinicID(clinicSpecialization);
+                        int clinicID = _clinicService.GetClinicID(clinicSpecialization);
 
                         int TakenSlots = _bookingRepository.GetTakenSlots(date, clinicID);
 

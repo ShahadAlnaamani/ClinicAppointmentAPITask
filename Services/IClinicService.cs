@@ -6,5 +6,7 @@ namespace ClinicAppointmentTask.Services
     {
         int AddClinic(Clinic clinic);
         List<Clinic> GetAllClinics();
+        public int GetClinicID(string ClinicName);
+        public int GetNextClinicSlot(string ClinicSpecialization);
     }
 }

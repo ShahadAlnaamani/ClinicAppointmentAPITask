@@ -1,5 +1,6 @@
 ﻿using ClinicAppointmentTask.Models;
 using ClinicAppointmentTask.Repositories;
+using System.Globalization;
 
 namespace ClinicAppointmentTask.Services
 {
@@ -54,6 +55,20 @@ namespace ClinicAppointmentTask.Services
 
             //returns patients list 
             return patients;
+        }
+
+
+        //Returns patient ID using patient name [0 if not found]
+        public int GetPatientID(string patientName)
+        {
+            return  _patientRepository.GetPatientID(patientName);
+        }
+
+
+        //Checks to see if patient exists or not [returns bool]
+        public bool PatientExists(string patientName)
+        {
+            return _patientRepository.PatientExists(patientName);
         }
     }
 }

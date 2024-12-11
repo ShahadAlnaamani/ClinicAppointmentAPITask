@@ -56,5 +56,19 @@ namespace ClinicAppointmentTask.Services
             //Otherwise returns list of clinics 
             return clinics;
         }
+
+
+        //Gets clinic ID using name [0 if not found]
+        public int GetClinicID(string ClinicSpecialization)
+        {
+            return _clinicRepository.GetClinicID(ClinicSpecialization);
+        }
+
+
+        //Gets next available slot 
+        public int GetNextClinicSlot(string ClinicSpecialization)
+        {
+            return _clinicRepository.GetNextSlot(ClinicSpecialization);
+        }
     }
 }

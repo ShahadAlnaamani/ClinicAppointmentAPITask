@@ -6,5 +6,7 @@ namespace ClinicAppointmentTask.Services
     {
         int AddPatient(Patient patient);
         List<Patient> GetAllPatients();
+        public int GetPatientID(string patientName);
+        public bool PatientExists(string patientName);
     }
 }
