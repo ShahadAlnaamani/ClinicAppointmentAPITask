@@ -8,5 +8,6 @@ namespace ClinicAppointmentTask.Services
         List<Clinic> GetAllClinics();
         public int GetClinicID(string ClinicName);
         public int GetNextClinicSlot(string ClinicSpecialization);
+        public bool ClinicSlotNumberOk(int slots);
     }
 }

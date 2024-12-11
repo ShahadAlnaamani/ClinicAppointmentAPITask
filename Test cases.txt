@@ -1,0 +1,79 @@
+Test Cases for Add Clinic:
+Test Case 1: Add Clinic with Valid Information
+Description: Verify that a clinic can be successfully added with a valid specialization and a valid number of slots.
+Input:
+Specialization: "Cardiology"
+Number of Slots: 10
+Expected Output: Clinic is added successfully, and a success message or confirmation is shown. The clinic's specialization should be stored as "Cardiology," and the number of slots should be 10.
+
+
+Test Case 2: Add Clinic with Specialization Already Taken
+Description: Verify that the system prevents adding a clinic with a specialization that already exists in the database.
+Input:
+Specialization: "Cardiology" (Assume "Cardiology" already exists in the system)
+Number of Slots: 5
+Expected Output: An error message should be displayed: "Specialization must be unique."
+
+
+Test Case 3: Add Clinic with Number of Slots Exceeding Maximum Limit
+Description: Verify that the system prevents adding a clinic with more than 20 slots.
+Input:
+Specialization: "Neurology"
+Number of Slots: 25
+Expected Output: An error message should be displayed: "Number of slots must not exceed 20."
+
+
+Test Case 4: Add Clinic with Number of Slots Less than Minimum Limit
+Description: Verify that the system prevents adding a clinic with fewer than 1 slot.
+Input:
+Specialization: "Orthopedics"
+Number of Slots: 0
+Expected Output: An error message should be displayed: "Number of slots must be at least 1."
+
+
+Test Case 5: Add Clinic with Empty Specialization
+Description: Verify that the system prevents adding a clinic if the specialization field is empty.
+Input:
+Specialization: "" (empty string)
+Number of Slots: 10
+Expected Output: An error message should be displayed: "Specialization is required."
+
+
+Test Case 6: Add Clinic with Specialization Length Exceeding Maximum Limit
+Description: Verify that the system prevents adding a clinic with a specialization string that exceeds a predefined character limit (e.g., 100 characters).
+Input:
+Specialization: "A" * 101 (101 characters)
+Number of Slots: 5
+Expected Output: An error message should be displayed: "Specialization cannot exceed 100 characters."
+
+
+Test Case 7: Add Clinic with Valid Specialization but Edge Number of Slots
+Description: Verify that the system allows adding a clinic with 20 slots, which is the maximum valid number.
+Input:
+Specialization: "Pediatrics"
+Number of Slots: 20
+Expected Output: Clinic is added successfully, and a success message or confirmation is shown. The clinic's specialization should be stored as "Pediatrics," and the number of slots should be 20.
+
+
+Test Case 8: Add Clinic with Specialization Containing Invalid Characters
+Description: Verify that the system prevents adding a clinic with a specialization that contains invalid characters (e.g., numbers or special characters).
+Input:
+Specialization: "Cardio123"
+Number of Slots: 10
+Expected Output: An error message should be displayed: "Specialization cannot contain numbers or special characters."
+
+
+Test Case 9: Add Clinic with Number of Slots as Negative Value
+Description: Verify that the system prevents adding a clinic if the number of slots is a negative value.
+Input:
+Specialization: "Dermatology"
+Number of Slots: -5
+Expected Output: An error message should be displayed: "Number of slots must be a positive integer."
+
+
+Test Case 10: Add Clinic with Specialization and Number of Slots as Null
+Description: Verify that the system prevents adding a clinic when both specialization and number of slots are left blank or null.
+Input:
+Specialization: null
+Number of Slots: null
+Expected Output: Error messages should be displayed: "Specialization is required." and "Number of slots is required."

@@ -70,5 +70,13 @@ namespace ClinicAppointmentTask.Services
         {
             return _clinicRepository.GetNextSlot(ClinicSpecialization);
         }
+
+
+        //Checks that the number of slots does not exceed the maximum (20)
+        public bool ClinicSlotNumberOk(int slots)
+        {
+            if (slots > 20) return false;
+            else return true;
+        }
     }
 }
