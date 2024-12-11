@@ -11,6 +11,7 @@ namespace ClinicAppointmentTask.Services
         public bool ClinicSlotNumberOk(int slots);
         public int ClinicSpecializationOk(string specialization);
         public int NewClinicValidation(int slots, string specialization);
+        public bool ClinicExists(string specialization);
 
     }
 }

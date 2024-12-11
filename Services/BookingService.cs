@@ -52,6 +52,17 @@ namespace ClinicAppointmentTask.Services
             else return false; //not found
         }
 
+        //Validates if patient exists using PatientName [returns bool]
+        public bool SpecializationExists(string clinicSpecialization)
+        {
+            bool clinicExists = _clinicService.ClinicExists(clinicSpecialization);
+            if (clinicExists)
+            {
+                return true; //patient found
+            }
+            else return false; //not found
+        }
+
 
         //Conducts validation to all info before adding booking 
         public int Validation(DateTime date, string patientName, string clinicSpecialization)
@@ -60,29 +71,34 @@ namespace ClinicAppointmentTask.Services
             {
                 //Checking if patient exists 
                 bool patientExists = PatientExists(patientName);
+                bool specializationExists = SpecializationExists(clinicSpecialization);
+
                 if (patientExists) //found patient
                 {
-                    int PatientID = _patientService.GetPatientID(patientName);
-                    int TotalSlots = _clinicService.GetNextClinicSlot(clinicSpecialization);
-
-                    //Checking slot availability
-                    if (TotalSlots != 0) //found clinic
+                    if (specializationExists)
                     {
-                        //Calculating slot number 
-                        int clinicID = _clinicService.GetClinicID(clinicSpecialization);
+                        int TotalSlots = _clinicService.GetNextClinicSlot(clinicSpecialization);
 
-                        int TakenSlots = _bookingRepository.GetTakenSlots(date, clinicID);
-
-
-                        if (TakenSlots < TotalSlots)
+                        //Checking slot availability
+                        if (TotalSlots != 0) //found clinic
                         {
-                            return 0; //no issues 
+                            //Calculating slot number 
+                            int clinicID = _clinicService.GetClinicID(clinicSpecialization);
+
+                            int TakenSlots = _bookingRepository.GetTakenSlots(date, clinicID);
+
+
+                            if (TakenSlots < TotalSlots)
+                            {
+                                return 0; //no issues 
+
+                            }
+                            else { return 3; } //no slots available 
 
                         }
-                        else { return 3; } //no slots available 
-
+                        else { return 3; } //no slots availabe 
                     }
-                    else { return 3; } //no slots availabe 
+                    else { return 4; } //clinic does not exist
                 }
 
                 else { return 2; } //patient does not exist

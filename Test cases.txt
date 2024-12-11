@@ -77,3 +77,123 @@ Input:
 Specialization: null
 Number of Slots: null
 Expected Output: Error messages should be displayed: "Specialization is required." and "Number of slots is required."
+
+
+3. Add Patient:
+Test Case 1: Add a new patient with valid data.
+Input:
+Name: "John Doe"
+Age: 30
+Gender: "Male"
+Expected Output:
+Patient added successfully.
+
+
+Test Case 2: Add a patient with an invalid age (negative number).
+Input:
+Name: "Jane Smith"
+Age: -5
+Gender: "Female"
+Expected Output:
+Error message: "Age must be a positive integer."
+
+
+Test Case 3: Add a patient with a missing name.
+Input:
+Name: ""
+Age: 25
+Gender: "Male"
+Expected Output:
+Error message: "Name cannot be empty."
+
+
+Test Case 4: Add a patient with valid data.
+Input:
+Name: "Alice Williams"
+Age: 35
+Gender: "Female"
+Expected Output:
+Patient added successfully.
+
+
+Test Case 5: Add a patient with only numbers in name.
+Input:
+Name: "123"
+Age: 35
+Gender: "Female"
+Expected Output:
+Error message: name must only contain letters.
+
+
+Test Case 6: Add a patient with no age.
+Input:
+Name: "abc"
+Age: 
+Gender: "Female"
+Expected Output:
+Error message: must add age.
+
+
+Test Case 7: Add a patient with no gender.
+Input:
+Name: "aabbcc"
+Age: 87
+Gender: 
+Expected Output:
+Error message: must add gender.
+
+
+5. Add Booking
+Test Case 1: Add a booking for a patient with a valid date and slot.
+
+Input:
+Date: "2024-12-15"
+Slotno: 5
+Patient: "John Doe" (ID exists)
+Clinic: "Cardiology" (Clinic exists and has available slots)
+Expected Output:
+Booking added successfully.
+
+
+Test Case 2: Add a booking with an invalid slot number (slot number 21).
+
+Input:
+Date: "2024-12-15"
+Slotno: 21
+Patient: "Jane Smith" (ID exists)
+Clinic: "Dentistry" (Clinic exists and has 20 available slots)
+Expected Output:
+Error message: "Invalid slot number. Slot number should be between 1 and the clinic's maximum slots."
+
+
+Test Case 3: Add a booking for a date with no available slots.
+
+Input:
+Date: "2024-12-15"
+Slotno: 10
+Patient: "Alice Williams" (ID exists)
+Clinic: "Cardiology" (Clinic exists but no available slots for that date)
+Expected Output:
+Error message: "No available slots for the selected date and time."
+
+
+Test Case 4: Add a booking for a clinic that doesn't exist
+
+Input:
+Date: "2024-12-15"
+Slotno: 5
+Patient: "Bob Johnson" (ID exists)
+Clinic: "Pediatrics" (Clinic exists and has available slots)
+Expected Output:
+Error message: "Error clinic does not exist."
+
+
+Test Case 5: Add a booking for a date in the past
+
+Input:
+Date: "2024-12-01"
+Slotno: 5
+Patient: "Bob Johnson" (ID exists)
+Clinic: "Pediatrics" (Clinic exists and has available slots)
+Expected Output:
+Error message: "Error date must be in the future."

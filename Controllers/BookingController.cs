@@ -36,6 +36,9 @@ namespace ClinicAppointmentTask.Controllers
                     case 3:
                         return BadRequest("<!>No available slots for this date<!>");
 
+                    case 4:
+                        return BadRequest("<!>This clinic does not exist<!>");
+
                     default:
                         return StatusCode(500, "<!>Error occured in creating booking, booking did not go through<!>");
                 }

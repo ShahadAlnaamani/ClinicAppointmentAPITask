@@ -125,5 +125,11 @@ namespace ClinicAppointmentTask.Services
             else return 0;
         }
 
+        //Checks to see if clinic exists or not [returns bool]
+        public bool ClinicExists(string specialization)
+        {
+            return _clinicRepository.ClinicExists(specialization);
+        }
+
     }
 }
