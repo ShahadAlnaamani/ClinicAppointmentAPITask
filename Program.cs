@@ -16,9 +16,11 @@ namespace ClinicAppointmentTask
                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             builder.Services.AddScoped<IClinicRepository, ClinicRepository>();
+            builder.Services.AddScoped<IPatientRepository, PatientRepository>();
 
 
             builder.Services.AddScoped<IClinicService, ClinicService>();
+            builder.Services.AddScoped<IPatientService, PatientService>();
 
 
             builder.Services.AddControllers();
