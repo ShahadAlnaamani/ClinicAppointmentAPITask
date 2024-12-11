@@ -1,5 +1,6 @@
 ﻿using ClinicAppointmentTask.Models;
 using ClinicAppointmentTask.Repositories;
+using System.Text.RegularExpressions;
 
 namespace ClinicAppointmentTask.Services
 {
@@ -87,6 +88,10 @@ namespace ClinicAppointmentTask.Services
                 else if (Specialization == 2)
                     return 3;
 
+                //Specialization contains charachters other than letters  
+                else if (Specialization == 3)
+                    return ;
+
                 else return 2; //specialization length too long
             }
 
@@ -101,17 +106,20 @@ namespace ClinicAppointmentTask.Services
             else return true;
         }
 
+        //Checks the format of specialization
         public int ClinicSpecializationOk(string specialization)
         {
             //checks length of specialization more than 20
             if (specialization.Length > 20)
-            {
                 return 1; 
-            }
-
+            
             //checks that specialization length is more than 1 
             else if (specialization.Length < 2 || specialization == null)
                 return 2;
+
+            //checks that specialization contains letters 
+            if (!Regex.IsMatch(specialization, @"^[a-zA-Z]"))
+                return 3;
 
             //All good
             else return 0;

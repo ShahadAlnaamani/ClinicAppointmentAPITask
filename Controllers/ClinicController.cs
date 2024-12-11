@@ -1,6 +1,7 @@
 ﻿using ClinicAppointmentTask.Models;
 using ClinicAppointmentTask.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 
 namespace ClinicAppointmentTask.Controllers
 {
@@ -21,6 +22,8 @@ namespace ClinicAppointmentTask.Controllers
         {
             try
             {
+                
+
                 //checks that number of slots not over 20 and that specialization length is not more than 20
                 int Validated = _clinicService.NewClinicValidation(noSlots, specialization);
 
@@ -43,6 +46,9 @@ namespace ClinicAppointmentTask.Controllers
 
                     case 3:
                         return BadRequest("<!>Specialization must be 2 or more characters<!>");
+
+                    case 4:
+                        return BadRequest("<!>Specialization must only contain alphabetical characters<!>");
 
                     default: return BadRequest("<!>Error occured in creating clinic try again<!>");
                 }
